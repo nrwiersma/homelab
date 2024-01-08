@@ -15,7 +15,7 @@ spec:
         valueFiles:
           - $values/infra/cert-manager/values.yaml
     - repoURL: https://github.com/nrwiersma/homelab.git
-      targetRevision: init
+      targetRevision: HEAD
       ref: values
   destination:
     server: "https://kubernetes.default.svc"
