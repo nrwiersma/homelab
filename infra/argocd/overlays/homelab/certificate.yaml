@@ -5,6 +5,8 @@ metadata:
   name: argocd
 spec:
   commonName: argocd.wiersma.tech
+  dnsNames:
+    - argocd.wiersma.tech
   subject:
     organizations:
       - Wiersma
