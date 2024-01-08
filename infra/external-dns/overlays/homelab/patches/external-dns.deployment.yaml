@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns
+spec:
+  template:
+    spec:
+      containers:
+        - name: external-dns
+          args:
+            - --source=service
+            - --domain-filter=wiersma.tech
+            - --provider=google
+            - --google-project=wiersma-tech
+            - --google-zone-visibility=public
+            - --policy=upsert-only
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /etc/secrets/service-account/credentials.json
+          volumeMounts:
+            - name: google-service-account
+              mountPath: /etc/secrets/service-account/
+      volumes:
+        - name: google-service-account
+          secret:
+            secretName: external-dns

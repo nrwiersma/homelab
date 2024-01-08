@@ -1,0 +1,18 @@
+---
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+name: run tests
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run yaml-lint
+        uses: ibiqlik/action-yamllint@v3
