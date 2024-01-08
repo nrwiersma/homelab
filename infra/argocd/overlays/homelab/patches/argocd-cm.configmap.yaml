@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+data:
+  url: "https://argocd.wiersma.tech"
+  kustomize.buildOptions: "--enable-helm"
+  resource.exclusions: |
+    - apiGroups:
+      - cilium.io
+      kinds:
+      - CiliumIdentity
+      clusters:
+      - "*"
+  oidc.config: |
+    name: Google
+    issuer: https://accounts.google.com
+    clientID: $google-oidc:client_id
+    clientSecret: $google-oidc:client_secret
+    requestedScopes: ["openid", "profile", "email"]

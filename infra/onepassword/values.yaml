@@ -1,0 +1,8 @@
+---
+connect:
+  credentialsName: onepassword-connect-credentials
+  serviceType: ClusterIP
+
+  api:
+    serviceMonitor:
+      enabled: true
