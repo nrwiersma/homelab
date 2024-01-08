@@ -1,0 +1,19 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd
+spec:
+  isCA: false
+  commonName: argocd.wiersma.tech
+  subject:
+    organizations:
+      - Wiersma
+  secretName: argocd-server-tls
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: acme
