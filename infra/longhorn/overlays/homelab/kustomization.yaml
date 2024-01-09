@@ -1,0 +1,35 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: longhorn-system
+
+resources:
+  - ../../base
+
+patches:
+  - target:
+      version: v1
+      kind: ConfigMap
+      name: longhorn-default-setting
+    path: patches/longhorn-default-setting.configmap.yaml
+  - target:
+      version: v1
+      kind: ConfigMap
+      name: longhorn-storageclass
+    path: patches/longhorn-storageclass.configmap.yaml
+  - target:
+      group: apps
+      version: v1
+      kind: DaemonSet
+      name: longhorn-manager
+    path: patches/longhorn-manager.daemonset.yaml
+  - target:
+      version: v1
+      kind: Service
+      name: longhorn-frontend
+    path: patches/longhorn-frontend.service.yaml
+
+replicas:
+  - name: longhorn-ui
+    count: 1
