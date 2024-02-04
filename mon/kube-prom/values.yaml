@@ -34,12 +34,10 @@ prometheus:
   prometheusSpec:
     replicas: 1
     retention: 3d
-    ruleSelector: {}
-    probeSelector: {}
-    podMonitorNamespaceSelector: {}
-    podMonitorSelector: {}
-    serviceMonitorNamespaceSelector: {}
-    serviceMonitorSelector: {}
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
     storageSpec:
       volumeClaimTemplate:
         spec:
