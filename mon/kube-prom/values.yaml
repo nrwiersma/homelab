@@ -47,15 +47,15 @@ prometheus:
               storage: 5Gi
     resources:
       requests:
-        cpu: 100m
+        cpu: 1
         memory: 2Gi
 
 grafana:
   plugins: []
   resources:
     requests:
-      cpu: 25m
-      memory: 64Mi
+      cpu: 100m
+      memory: 500Mi
 
   sidecar:
     resources:
