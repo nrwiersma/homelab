@@ -1,0 +1,113 @@
+---
+defaultRules:
+  rules:
+    etcd: false
+
+kubeEtcd:
+  enabled: false
+
+alertmanager:
+  config:
+    receivers:
+      - name: 'null' # TODO:
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: alerts.wiersma.tech.
+      external-dns.alpha.kubernetes.io/ttl: 5m
+    type: LoadBalancer
+    port: 80
+  alertmanagerSpec:
+    replicas: 1
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 1Gi
+    resources:
+      requests:
+        cpu: 25m
+        memory: 32Mi
+
+prometheus:
+  prometheusSpec:
+    replicas: 1
+    retention: 3d
+    ruleSelector: {}
+    probeSelector: {}
+    podMonitorNamespaceSelector: {}
+    podMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+    serviceMonitorSelector: {}
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+    resources:
+      requests:
+        cpu: 100m
+        memory: 2Gi
+
+grafana:
+  plugins: []
+  resources:
+    requests:
+      cpu: 25m
+      memory: 64Mi
+
+  sidecar:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 64Mi
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: mon.wiersma.tech.
+      external-dns.alpha.kubernetes.io/ttl: 5m
+    type: LoadBalancer
+
+prometheusOperator:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+
+prometheus-node-exporter:
+  resources:
+    requests:
+      cpu: 5m
+      memory: 16Mi
+
+kube-state-metrics:
+  resources:
+    requests:
+      cpu: 5m
+      memory: 128Mi
+
+kubeControllerManager:
+  enabled: true
+  endpoints:
+    - "10.0.2.111"
+  service:
+    enabled: true
+    port: 10257
+    targetPort: 10257
+  serviceMonitor:
+    enabled: true
+    https: false
+
+kubeScheduler:
+  enabled: true
+  endpoints:
+    - "10.0.2.111"
+  service:
+    enabled: true
+    port: 10259
+    targetPort: 10259
+  serviceMonitor:
+    enabled: true
+    https: false
