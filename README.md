@@ -42,9 +42,9 @@ stringData:
     base64-encoded-file
 ```
 
-#### Setup Applications:
+#### Setup Applications
 
-The last of the boo
+To finish bootstrapping the cluster, apply the ArgoCD applications and projects:
 
 ```shell
 kubectl apply --recursive -f cluster/
