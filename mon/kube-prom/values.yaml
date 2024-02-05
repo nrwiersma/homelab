@@ -14,25 +14,21 @@ kubeScheduler:
 
 alertmanager:
   config:
+    global:
+      resolve_timeout: 1m
+      slack_api_url_file: /etc/alertmanager/secrets/slack-secrets/slack-api-url
     route:
-      groupBy: [ 'alertname', 'job' ]
-      groupWait: 10s
-      groupInterval: 5m
-      repeatInterval: 12h
-      continue: true
-      matchers:
-        - name: severity
-          matchType: "="
-          value: "warning"
       receiver: slack
     receivers:
+      - name: 'null'
       - name: slack
         slack_configs:
           - channel: '#homelab'
-            apiURL:
+            api_url:
               key: slack-api-url
               name: slack-secrets
-            sendResolved: true
+            send_resolved: true
+            icon_url: https://avatars3.githubusercontent.com/u/3380462
             title: >-
               {{`{{`}} if eq .Status "firing" {{`}}`}}:fire: *FIRING* {{`{{`}} else {{`}}`}}:ok_hand: *RESOLVED* {{`{{`}} end {{`}}`}}
             text: >-
@@ -52,6 +48,8 @@ alertmanager:
   alertmanagerSpec:
     replicas: 1
     externalUrl: http://alerts.wiersma.tech
+    secrets:
+      - slack-secrets
     storage:
       volumeClaimTemplate:
         spec:
