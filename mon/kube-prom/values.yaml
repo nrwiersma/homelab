@@ -60,11 +60,13 @@ grafana:
   plugins: []
   grafana.ini:
     auth:
-      anonymous:
+      disable_login_form: true
+      disable_signout_menu: true
+    auth.anonymous:
         enabled: true
         org_role: Admin
-      basic:
-        enabled: true
+    users:
+      viewers_can_edit: true
   resources:
     requests:
       cpu: 100m
