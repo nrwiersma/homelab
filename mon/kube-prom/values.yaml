@@ -74,7 +74,6 @@ alertmanager:
 prometheus:
   prometheusSpec:
     replicas: 1
-    externalUrl: http://prom.wiersma.tech
     retention: 3d
     ruleSelectorNilUsesHelmValues: false
     probeSelectorNilUsesHelmValues: false
