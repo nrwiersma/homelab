@@ -35,9 +35,6 @@ alertmanager:
             text: '{{ template "slack.text" . }}'
             actions:
               - type: button
-                text: 'Query :mag:'
-                url: '{{ (index .Alerts 0).GeneratorURL }}'
-              - type: button
                 text: 'Dashboard :chart_with_upwards_trend:'
                 url: '{{ (index .Alerts 0).Annotations.dashboard_url }}'
               - type: button
@@ -72,8 +69,18 @@ alertmanager:
         memory: 32Mi
 
 prometheus:
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: prom.wiersma.tech.
+      external-dns.alpha.kubernetes.io/ttl: 5m
+    type: LoadBalancer
+    additionalPorts:
+      - name: external-http
+        port: 80
+        targetPort: 9090
   prometheusSpec:
     replicas: 1
+    externalUrl: http://prom.wiersma.tech
     retention: 3d
     ruleSelectorNilUsesHelmValues: false
     probeSelectorNilUsesHelmValues: false
