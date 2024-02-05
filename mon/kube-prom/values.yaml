@@ -26,9 +26,18 @@ alertmanager:
         slack_configs:
           - channel: '#homelab'
             send_resolved: true
-            icon_url: https://avatars3.githubusercontent.com/u/3380462
-            title: '{{ template "custom_title" . }}'
-            text: '{{ template "custom_slack_message" . }}'
+            title: '{{ template "slack.title" . }}'
+            text: '{{ template "slack.text" . }}'
+            actions:
+              - type: button
+                text: 'Query :mag:'
+                url: '{{ (index .Alerts 0).GeneratorURL }}'
+              - type: button
+                text: 'Dashboard :chart_with_upwards_trend:'
+                url: '{{ (index .Alerts 0).Annotations.dashboard_url }}'
+              - type: button
+                text: 'Silence :no_bell:'
+                url: '{{ template "__alert_silence_link" . }}'
     templates:
       - '/etc/alertmanager/config/*.tmpl'
       - '/etc/alertmanager/configmaps/alertmanager-templates/*.tmpl'
