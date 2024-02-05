@@ -19,6 +19,10 @@ alertmanager:
       resolve_timeout: 1m
       slack_api_url_file: /etc/alertmanager/secrets/slack-secrets/slack-api-url
     route:
+      group_by: ['alertname', 'job']
+      group_wait: 30s
+      group_interval: 10m
+      repeat_interval: 12h
       receiver: slack
     receivers:
       - name: 'null'
@@ -68,8 +72,15 @@ alertmanager:
         memory: 32Mi
 
 prometheus:
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: prom.wiersma.tech.
+      external-dns.alpha.kubernetes.io/ttl: 5m
+    type: LoadBalancer
+    port: 80
   prometheusSpec:
     replicas: 1
+    externalUrl: http://prom.wiersma.tech
     retention: 3d
     ruleSelectorNilUsesHelmValues: false
     probeSelectorNilUsesHelmValues: false
