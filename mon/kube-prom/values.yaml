@@ -30,7 +30,7 @@ alertmanager:
     replicas: 1
     externalUrl: http://alerts.wiersma.tech
     secrets:
-      - alertmanager-secrets
+      - slack-secrets
     storage:
       volumeClaimTemplate:
         spec:
