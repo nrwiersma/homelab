@@ -15,7 +15,7 @@ spec:
         valueFiles:
           - $values/mon/kube-prom/values.yaml
     - repoURL: https://github.com/nrwiersma/homelab.git
-      targetRevision: prom
+      targetRevision: HEAD
       path: mon/kube-prom
       ref: values
   destination:
