@@ -1,0 +1,147 @@
+---
+defaultRules:
+  rules:
+    etcd: false
+    kubeProxy: false
+
+kubeEtcd:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 1m
+      slack_api_url_file: /etc/alertmanager/secrets/slack-secrets/slack-api-url
+    route:
+      group_by: ['alertname', 'job']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+      receiver: slack
+    receivers:
+      - name: 'null'
+      - name: slack
+        slack_configs:
+          - channel: '#homelab'
+            send_resolved: true
+            color: '{{ template "slack.color" . }}'
+            title: '{{ template "slack.title" . }}'
+            text: '{{ template "slack.text" . }}'
+            actions:
+              - type: button
+                text: 'Query :mag:'
+                url: '{{ (index .Alerts 0).GeneratorURL }}'
+              - type: button
+                text: 'Dashboard :chart_with_upwards_trend:'
+                url: '{{ (index .Alerts 0).Annotations.dashboard_url }}'
+              - type: button
+                text: 'Silence :no_bell:'
+                url: '{{ template "__alert_silence_link" . }}'
+    templates:
+      - '/etc/alertmanager/config/*.tmpl'
+      - '/etc/alertmanager/configmaps/alertmanager-templates/*.tmpl'
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: alerts.wiersma.tech.
+      external-dns.alpha.kubernetes.io/ttl: 5m
+    type: LoadBalancer
+    port: 80
+  alertmanagerSpec:
+    replicas: 1
+    externalUrl: http://alerts.wiersma.tech
+    secrets:
+      - slack-secrets
+    configMaps:
+      - alertmanager-templates
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 1Gi
+    resources:
+      requests:
+        cpu: 25m
+        memory: 32Mi
+
+prometheus:
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: prom.wiersma.tech.
+      external-dns.alpha.kubernetes.io/ttl: 5m
+    type: LoadBalancer
+    additionalPorts:
+      - name: external-http
+        port: 80
+        targetPort: 9090
+  prometheusSpec:
+    replicas: 1
+    externalUrl: http://prom.wiersma.tech
+    retention: 3d
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+    resources:
+      requests:
+        cpu: 1
+        memory: 2Gi
+
+grafana:
+  plugins: []
+  grafana.ini:
+    auth:
+      disable_login_form: true
+      disable_signout_menu: true
+    auth.anonymous:
+      enabled: true
+      org_role: Admin
+    users:
+      viewers_can_edit: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 500Mi
+
+  sidecar:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 64Mi
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: mon.wiersma.tech.
+      external-dns.alpha.kubernetes.io/ttl: 5m
+    type: LoadBalancer
+
+prometheusOperator:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+
+prometheus-node-exporter:
+  resources:
+    requests:
+      cpu: 5m
+      memory: 16Mi
+
+kube-state-metrics:
+  resources:
+    requests:
+      cpu: 5m
+      memory: 128Mi

@@ -2,5 +2,6 @@
 extends: default
 ignore: |
   .github/
+  mon/kube-prom/slack-templates.cm.yaml
 rules:
   line-length: disable
