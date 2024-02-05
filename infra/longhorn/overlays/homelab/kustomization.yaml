@@ -6,6 +6,8 @@ namespace: longhorn-system
 
 resources:
   - ../../base
+  - servicemonitor.yaml
+  - dashboard.cm.yaml
 
 patches:
   - target:
