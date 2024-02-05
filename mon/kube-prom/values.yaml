@@ -72,12 +72,6 @@ alertmanager:
         memory: 32Mi
 
 prometheus:
-  service:
-    annotations:
-      external-dns.alpha.kubernetes.io/hostname: prom.wiersma.tech.
-      external-dns.alpha.kubernetes.io/ttl: 5m
-    type: LoadBalancer
-    port: 80
   prometheusSpec:
     replicas: 1
     externalUrl: http://prom.wiersma.tech
