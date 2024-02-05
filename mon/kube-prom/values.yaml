@@ -2,6 +2,7 @@
 defaultRules:
   rules:
     etcd: false
+    kubeProxy: false
 
 kubeEtcd:
   enabled: false
@@ -26,6 +27,11 @@ alertmanager:
           - channel: '#homelab'
             send_resolved: true
             icon_url: https://avatars3.githubusercontent.com/u/3380462
+            title: '{{ template "custom_title" . }}'
+            text: '{{ template "custom_slack_message" . }}'
+    templates:
+      - '/etc/alertmanager/config/*.tmpl'
+      - '/etc/alertmanager/configmaps/alertmanager-templates/*.tmpl'
   service:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: alerts.wiersma.tech.
@@ -37,6 +43,8 @@ alertmanager:
     externalUrl: http://alerts.wiersma.tech
     secrets:
       - slack-secrets
+    configMaps:
+      - alertmanager-templates
     storage:
       volumeClaimTemplate:
         spec:

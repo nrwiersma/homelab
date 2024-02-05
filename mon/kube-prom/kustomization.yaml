@@ -6,3 +6,4 @@ namespace: mon
 
 resources:
   - externalsecret.yaml
+  - slack-templates.cm.yaml
