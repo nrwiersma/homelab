@@ -26,6 +26,7 @@ alertmanager:
         slack_configs:
           - channel: '#homelab'
             send_resolved: true
+            color: '{{ template "slack.color" . }}'
             title: '{{ template "slack.title" . }}'
             text: '{{ template "slack.text" . }}'
             actions:
