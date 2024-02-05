@@ -6,6 +6,12 @@ defaultRules:
 kubeEtcd:
   enabled: false
 
+kubeControllerManager:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
 alertmanager:
   config:
     receivers:
@@ -52,6 +58,13 @@ prometheus:
 
 grafana:
   plugins: []
+  grafana.ini:
+    auth:
+      anonymous:
+        enabled: true
+        org_role: Admin
+      basic:
+        enabled: true
   resources:
     requests:
       cpu: 100m
@@ -85,27 +98,3 @@ kube-state-metrics:
     requests:
       cpu: 5m
       memory: 128Mi
-
-kubeControllerManager:
-  enabled: true
-  endpoints:
-    - "10.0.2.111"
-  service:
-    enabled: true
-    port: 10257
-    targetPort: 10257
-  serviceMonitor:
-    enabled: true
-    https: false
-
-kubeScheduler:
-  enabled: true
-  endpoints:
-    - "10.0.2.111"
-  service:
-    enabled: true
-    port: 10259
-    targetPort: 10259
-  serviceMonitor:
-    enabled: true
-    https: false
