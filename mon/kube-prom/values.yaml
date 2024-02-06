@@ -112,6 +112,14 @@ grafana:
       org_role: Admin
     users:
       viewers_can_edit: true
+  persistence:
+    enabled: true
+    type: pvc
+    accessModes:
+      - ReadWriteOnce
+    size: 1Gi
+    finalizers:
+      - kubernetes.io/pvc-protection
   resources:
     requests:
       cpu: 100m
