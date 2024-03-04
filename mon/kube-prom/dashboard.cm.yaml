@@ -35,7 +35,6 @@ data:
       "fiscalYearStartMonth": 0,
       "gnetId": 16450,
       "graphTooltip": 1,
-      "id": 26,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -1516,7 +1515,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1548,8 +1548,8 @@ data:
               "showLegend": false
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "pluginVersion": "8.0.6",
@@ -1633,7 +1633,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1665,8 +1666,8 @@ data:
               "showLegend": false
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "pluginVersion": "8.0.6",
@@ -1737,7 +1738,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1769,8 +1771,8 @@ data:
               "showLegend": false
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "pluginVersion": "8.0.6",
@@ -1867,7 +1869,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1898,8 +1901,8 @@ data:
               "sortDesc": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "pluginVersion": "8.0.6",
@@ -1969,7 +1972,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2025,8 +2029,8 @@ data:
               "sortDesc": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "pluginVersion": "8.0.6",
@@ -2096,7 +2100,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2124,8 +2129,8 @@ data:
               "showLegend": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "targets": [
@@ -2143,7 +2148,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Temprature by node",
+          "title": "Temperature by node",
           "type": "timeseries"
         },
         {
@@ -2193,7 +2198,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2208,7 +2214,7 @@ data:
           },
           "gridPos": {
             "h": 7,
-            "w": 12,
+            "w": 8,
             "x": 0,
             "y": 33
           },
@@ -2224,8 +2230,8 @@ data:
               "sortDesc": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "pluginVersion": "8.0.6",
@@ -2307,7 +2313,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2322,8 +2329,8 @@ data:
           },
           "gridPos": {
             "h": 7,
-            "w": 12,
-            "x": 12,
+            "w": 8,
+            "x": 8,
             "y": 33
           },
           "id": 62,
@@ -2336,7 +2343,7 @@ data:
             },
             "tooltip": {
               "mode": "multi",
-              "sort": "none"
+              "sort": "desc"
             }
           },
           "targets": [
@@ -2369,6 +2376,104 @@ data:
             }
           ],
           "title": "Disk I/O by node",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "smooth",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "celsius",
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 16,
+            "y": 33
+          },
+          "id": 63,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "avg by(instance) (avg_over_time(nvme_temperature_celsius[$__rate_interval]))",
+              "instant": false,
+              "interval": "$resolution",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Disk Temperature by node",
           "type": "timeseries"
         }
       ],
@@ -2509,6 +2614,6 @@ data:
       "timezone": "browser",
       "title": "Kubernetes / Views / K3s Cluster",
       "uid": "1bI4P-xiz",
-      "version": 5,
+      "version": 1,
       "weekStart": ""
     }
