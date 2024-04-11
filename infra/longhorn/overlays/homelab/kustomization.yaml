@@ -6,6 +6,7 @@ namespace: longhorn-system
 
 resources:
   - ../../base
+  - externalsecret.yaml
   - servicemonitor.yaml
   - dashboard.cm.yaml
 
