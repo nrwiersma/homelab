@@ -1,0 +1,39 @@
+---
+image:
+  registry: ghcr.io
+  repository: linuxserver/plex
+  tag: "1.40.1.8227-c0dd5a73e-ls212"
+
+pms:
+  configStorage: 2Gi
+  resources: {}
+
+#initContainer:
+#  script: ""
+
+service:
+  type: LoadBalancer
+  port: 80
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: plex.wiersma.tech.
+    external-dns.alpha.kubernetes.io/ttl: 5m
+
+extraEnv:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: Etc/UTC
+  ALLOWED_NETWORKS: "10.0.0.1/255.255.255.0,10.0.2.1/255.255.255.0,10.42.0.1/255.255.0.0"
+
+extraVolumeMounts:
+  - name: series
+    mountPath: "/media/series"
+  - name: movies
+    mountPath: "/media/movies"
+
+extraVolumes:
+  - name: series
+    persistentVolumeClaim:
+      claimName: series
+  - name: movies
+    persistentVolumeClaim:
+      claimName: movies

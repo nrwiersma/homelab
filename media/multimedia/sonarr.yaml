@@ -1,0 +1,85 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sonarr
+  labels:
+    app.kubernetes.io/name: sonarr
+spec:
+  replicas: 1
+  serviceName: sonarr
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sonarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sonarr
+    spec:
+      containers:
+        - name: sonarr
+          image: ghcr.io/linuxserver/sonarr:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8989
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: Etc/UTC
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+          volumeMounts:
+            - name: sonarr-config
+              mountPath: "/config"
+            - name: series
+              mountPath: "/series"
+            - name: downloads
+              mountPath: "/downloads"
+      volumes:
+        - name: series
+          persistentVolumeClaim:
+            claimName: series
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: sonarr-config
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
+        volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarr
+  labels:
+    app.kubernetes.io/name: sonarr
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: sonarr.wiersma.tech.
+    external-dns.alpha.kubernetes.io/ttl: 5m
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: sonarr
+  ports:
+    - name: sonarr
+      port: 80
+      targetPort: 8989

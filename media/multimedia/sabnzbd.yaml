@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sabnzbd
+  labels:
+    app.kubernetes.io/name: sabnzbd
+spec:
+  replicas: 1
+  serviceName: sabnzbd
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sabnzbd
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sabnzbd
+    spec:
+      containers:
+        - name: sabnzbd
+          image: ghcr.io/linuxserver/sabnzbd:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: Etc/UTC
+            - name: HOST_WHITELIST_ENTRIES
+              value: "sabnzbd.wiersma.tech"
+          volumeMounts:
+            - name: sabnzbd-config
+              mountPath: "/config"
+            - name: downloads
+              mountPath: "/downloads"
+      volumes:
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: sabnzbd-config
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sabnzbd
+  labels:
+    app.kubernetes.io/name: sabnzbd
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: sabnzbd.wiersma.tech.
+    external-dns.alpha.kubernetes.io/ttl: 5m
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: sabnzbd
+  ports:
+    - name: sabnzbd
+      port: 80
+      targetPort: 8080
