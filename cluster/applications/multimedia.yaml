@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: multimedia
+  namespace: argocd
+spec:
+  project: media
+  sources:
+    - repoURL: https://plexinc.github.io/pms-docker/
+      chart: plex-media-server
+      targetRevision: 0.3.0
+      helm:
+        releaseName: plex
+        valueFiles:
+          - $values/media/multimedia/plex.values.yaml
+    - repoURL: https://github.com/nrwiersma/homelab.git
+      targetRevision: HEAD
+      path: media/multimedia
+      ref: values
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: media
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
