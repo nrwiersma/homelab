@@ -1,0 +1,88 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: samba
+  labels:
+    app.kubernetes.io/name: samba
+spec:
+  replicas: 1
+  serviceName: samba
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: samba
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: samba
+    spec:
+      containers:
+        - name: samba
+          image: mbentley/timemachine:smb
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: mdns
+              containerPort: 5353
+              protocol: UDP
+            - name: wins
+              containerPort: 137
+              protocol: UDP
+            - name: datagram
+              containerPort: 138
+              protocol: UDP
+            - name: session
+              containerPort: 139
+              protocol: TCP
+            - name: cifs
+              containerPort: 445
+              protocol: TCP
+          env:
+            - name: CUSTOM_SMB_CONF
+              value: "false"
+            - name: CUSTOM_USER
+              value: "false"
+            - name: DEBUG_LEVEL
+              value: "1"
+            - name: MIMIC_MODEL
+              value: "TimeCapsule8,119"
+            - name: EXTERNAL_CONF
+              value: ""
+            - name: HIDE_SHARES
+              value: "no"
+            - name: SET_PERMISSIONS
+              value: "false"
+            - name: SMB_INHERIT_PERMISSIONS
+              value: "no"
+            - name: SMB_NFS_ACES
+              value: "no"
+            - name: SMB_METADATA
+              value: "stream"
+            - name: SMB_PORT
+              value: "445"
+            - name: SMB_VFS_OBJECTS
+              value: "fruit streams_xattr"
+            - name: WORKGROUP
+              value: "WORKGROUP"
+          readinessProbe:
+            tcpSocket:
+              port: cifs
+          volumeMounts:
+            - name: time-machine
+              mountPath: /opt/media
+            - name: run-samba
+              mountPath: /run/samba
+      volumes:
+        - name: run-samba
+          emptyDir: {}
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: time-machine
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
+        volumeMode: Filesystem

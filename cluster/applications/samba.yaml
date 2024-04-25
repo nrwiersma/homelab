@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: samba
+  namespace: argocd
+spec:
+  project: media
+  sources:
+    - repoURL: https://github.com/nrwiersma/homelab.git
+      targetRevision: HEAD
+      path: media/samba
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: media
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
