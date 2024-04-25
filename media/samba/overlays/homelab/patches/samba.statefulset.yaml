@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: samba
+spec:
+  template:
+    spec:
+      containers:
+        - name: samba
+          env:
+            - name: CUSTOM_SMB_CONF
+              value: "true"
+            - name: TM_USERNAME
+              value: media
+            - name: TM_GROUPNAME
+              value: media
+            - name: PASSWORD
+              value: media
+            - name: SET_PERMISSIONS
+              value: "true"
+          volumeMounts:
+            - name: config
+              mountPath: /etc/samba/smb.conf
+              subPath: smb.conf
+            - name: movies
+              mountPath: /opt/movies
+            - name: series
+              mountPath: /opt/series
+            - name: downloads
+              mountPath: /opt/downloads
+      volumes:
+        - name: config
+          configMap:
+            name: samba-config
+        - name: movies
+          persistentVolumeClaim:
+            claimName: movies
+        - name: series
+          persistentVolumeClaim:
+            claimName: series
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: time-machine
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 500Gi

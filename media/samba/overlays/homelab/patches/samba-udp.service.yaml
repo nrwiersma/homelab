@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: samba-udp
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "samba"
+    external-dns.alpha.kubernetes.io/hostname: media.wiersma.tech.
+    external-dns.alpha.kubernetes.io/ttl: 5m
+spec:
+  type: LoadBalancer
