@@ -1,6 +1,23 @@
 ---
 installCRDs: true
 
+resources:
+  requests:
+    cpu: 10m
+    memory: 50Mi
+
 prometheus:
   servicemonitor:
     enabled: true
+
+webhook:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 50Mi
+
+cainjector:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 100Mi
