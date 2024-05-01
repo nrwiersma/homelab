@@ -4,5 +4,15 @@ connect:
   serviceType: ClusterIP
 
   api:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
     serviceMonitor:
       enabled: true
+
+  sync:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
