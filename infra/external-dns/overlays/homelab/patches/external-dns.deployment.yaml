@@ -18,6 +18,10 @@ spec:
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /etc/secrets/service-account/credentials.json
+          resources:
+            requests:
+              cpu: 10m
+              memory: 100Mi
           volumeMounts:
             - name: google-service-account
               mountPath: /etc/secrets/service-account/
