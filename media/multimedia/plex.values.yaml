@@ -5,11 +5,8 @@ image:
   tag: "1.40.1.8227-c0dd5a73e-ls212"
 
 pms:
-  configStorage: 2Gi
+  configStorage: 10Gi
   resources: {}
-
-#initContainer:
-#  script: ""
 
 service:
   type: LoadBalancer
