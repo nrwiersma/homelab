@@ -9,6 +9,7 @@ persistence:
 
 service:
   annotations:
+    metallb.universe.tf/loadBalancerIPs: "10.0.2.3"
     external-dns.alpha.kubernetes.io/hostname: influx.wiersma.tech.
     external-dns.alpha.kubernetes.io/ttl: 5m
   type: LoadBalancer
