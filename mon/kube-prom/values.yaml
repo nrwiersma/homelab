@@ -10,7 +10,7 @@ additionalPrometheusRulesMap:
       - name: k3s-backup.rules
         rules:
           - alert: K3SBackupFailed
-            expr: changes(k3s_backup_last_run_seconds[12h]) == 0
+            expr: sum(changes(k3s_backup_last_run_seconds[12h])) == 0
             for: 5m
 
 kubeEtcd:
