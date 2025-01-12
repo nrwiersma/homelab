@@ -8,6 +8,8 @@ data:
     backup-target: s3://wiersma-tech-backup@us/longhorn
     backup-target-credential-secret: longhorn-gcp-backups
     priority-class: longhorn-critical
-    create-default-disk-labeled-nodes: true
+    create-default-disk-labeled-nodes: false
     default-replica-count: 2
     taint-toleration: node-role.kubernetes.io/storage:NoSchedule
+    snapshot-data-integrity: fast-check
+    fast-replica-rebuild-enabled: true
