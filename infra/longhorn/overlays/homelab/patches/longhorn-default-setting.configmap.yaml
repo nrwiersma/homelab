@@ -9,6 +9,8 @@ data:
     backup-target-credential-secret: longhorn-gcp-backups
     priority-class: longhorn-critical
     create-default-disk-labeled-nodes: false
+    default-data-path: /data
+    storage-reserved-percentage-for-default-disk: 0
     default-replica-count: 2
     taint-toleration: node-role.kubernetes.io/storage:NoSchedule
     snapshot-data-integrity: fast-check
