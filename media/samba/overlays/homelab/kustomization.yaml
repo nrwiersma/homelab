@@ -28,4 +28,4 @@ patches:
 
 images:
   - name: mbentley/timemachine
-    newTag: smb-20240424
+    newTag: smb-20250219
