@@ -6,13 +6,6 @@ metadata:
 data:
   url: "https://argocd.wiersma.tech"
   kustomize.buildOptions: "--enable-helm"
-  resource.exclusions: |
-    - apiGroups:
-      - cilium.io
-      kinds:
-      - CiliumIdentity
-      clusters:
-      - "*"
   oidc.config: |
     name: Google
     issuer: https://accounts.google.com
