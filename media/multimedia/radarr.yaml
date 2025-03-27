@@ -57,6 +57,8 @@ spec:
       kind: PersistentVolumeClaim
       metadata:
         name: radarr-config
+        labels:
+          recurring-job-group.longhorn.io/backup: enabled
       spec:
         accessModes:
           - ReadWriteOnce
