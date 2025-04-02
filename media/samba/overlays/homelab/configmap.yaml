@@ -19,7 +19,7 @@ data:
     server role = standalone server
     smb ports = 445
     workgroup = WORKGROUP
-    vfs objects = catia fruit streams_xattr
+    vfs objects = catia fruit streams_xattr recycle
     fruit:aapl = yes
     fruit:nfs_aces = no
     fruit:model = TimeCapsule8,119
