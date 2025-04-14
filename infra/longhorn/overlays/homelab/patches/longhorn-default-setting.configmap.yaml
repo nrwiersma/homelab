@@ -14,6 +14,6 @@ data:
     default-replica-count: 2
     taint-toleration: node-role.kubernetes.io/storage:NoSchedule
     snapshot-data-integrity: fast-check
-    snapshot-data-integrity-cronjob: "0 0 * * *"
+    snapshot-data-integrity-cronjob: "0 2 * * *"
     snapshot-data-integrity-immediate-check-after-snapshot-creation: true
     fast-replica-rebuild-enabled: true
