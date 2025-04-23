@@ -8,7 +8,7 @@ data:
     backup-target: s3://wiersma-tech-backup@us/longhorn
     backup-target-credential-secret: longhorn-gcp-backups
     priority-class: longhorn-critical
-    create-default-disk-labeled-nodes: false
+    create-default-disk-labeled-nodes: true
     default-data-path: /data
     storage-reserved-percentage-for-default-disk: 0
     default-replica-count: 2

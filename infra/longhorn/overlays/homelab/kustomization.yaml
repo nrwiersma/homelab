@@ -9,6 +9,7 @@ resources:
   - externalsecret.yaml
   - servicemonitor.yaml
   - dashboard.cm.yaml
+  - recurringjob.yaml
   - prometheusrule.yaml
 
 patches:
