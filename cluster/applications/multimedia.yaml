@@ -9,7 +9,7 @@ spec:
   sources:
     - repoURL: https://plexinc.github.io/pms-docker/
       chart: plex-media-server
-      targetRevision: 0.3.0
+      targetRevision: 0.10.0
       helm:
         releaseName: plex
         valueFiles:

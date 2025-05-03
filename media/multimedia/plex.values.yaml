@@ -22,6 +22,39 @@ extraEnv:
   TZ: Etc/UTC
   ALLOWED_NETWORKS: "10.0.0.1/255.255.255.0,10.0.2.1/255.255.255.0,10.42.0.1/255.255.0.0"
 
+extraInitContainers:
+  - name: imagemaid
+    image: kometateam/imagemaid
+    restartPolicy: Always
+    env:
+      - name: PLEX_PATH
+        value: /config
+      - name: MODE
+        value: remove
+      - name: SCHEDULE
+        value: 05:00|weekly(monday)
+      - name: PLEX_URL
+        value: http://localhost:32400
+      - name: TIMEOUT
+        value: '600'
+      - name: SLEEP
+        value: '60'
+      - name: PHOTO_TRANSCODER
+        value: 'True'
+      - name: CLEAN_BUNDLES
+        value: 'True'
+      - name: OPTIMIZE_DB
+        value: 'True'
+      - name: PLEX_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: plex-token
+            key: token
+    volumeMounts:
+      - name: pms-config
+        mountPath: /config
+        subPath: 'Library/Application Support/Plex Media Server/'
+
 extraVolumeMounts:
   - name: series
     mountPath: "/media/series"
