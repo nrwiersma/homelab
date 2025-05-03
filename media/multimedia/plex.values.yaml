@@ -22,6 +22,24 @@ extraEnv:
   TZ: Etc/UTC
   ALLOWED_NETWORKS: "10.0.0.1/255.255.255.0,10.0.2.1/255.255.255.0,10.42.0.1/255.255.0.0"
 
+initContainer:
+  script: |-
+    #!/bin/sh
+    echo "Waiting for pre-existing pms database to uploaded..."
+    
+    if [ -d "/config/Library" ]; then
+      echo "PMS library already exists, exiting."
+      exit 0
+    fi
+    
+    # wait for the database archive to be manually copied to the server
+    while [ ! -f /pms.tgz ]; do sleep 2; done;
+    
+    tar -xvzf /pms.tgz -C /config
+    rm pms.tgz
+    
+    echo "Done."
+
 extraInitContainers:
   - name: imagemaid
     image: kometateam/imagemaid
