@@ -3,5 +3,6 @@ extends: default
 ignore: |
   .github/
   mon/kube-prom/slack-templates.cm.yaml
+  media/multimedia/plex.values.yaml
 rules:
   line-length: disable
