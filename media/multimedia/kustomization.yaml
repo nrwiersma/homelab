@@ -14,6 +14,6 @@ images:
   - name: ghcr.io/linuxserver/sonarr
     newTag: 4.0.14
   - name: ghcr.io/linuxserver/radarr
-    newTag: 5.21.1
+    newTag: 5.22.4
   - name: ghcr.io/linuxserver/sabnzbd
-    newTag: 4.5.0
+    newTag: 4.5.1
