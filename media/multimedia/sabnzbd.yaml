@@ -32,6 +32,12 @@ spec:
               value: Etc/UTC
             - name: HOST_WHITELIST_ENTRIES
               value: "sabnzbd.wiersma.tech"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 500Mi
+            limits:
+              memory: 500Mi
           volumeMounts:
             - name: sabnzbd-config
               mountPath: "/config"

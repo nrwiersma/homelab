@@ -38,6 +38,12 @@ spec:
             httpGet:
               path: /ping
               port: http
+          resources:
+            requests:
+              cpu: 200m
+              memory: 500Mi
+            limits:
+              memory: 2Gi
           volumeMounts:
             - name: sonarr-config
               mountPath: "/config"
