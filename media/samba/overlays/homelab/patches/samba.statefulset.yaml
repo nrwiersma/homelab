@@ -19,6 +19,12 @@ spec:
               value: media
             - name: SET_PERMISSIONS
               value: "true"
+          resources:
+            requests:
+              cpu: 300m
+              memory: 1Gi
+            limits:
+              memory: 1Gi
           volumeMounts:
             - name: config
               mountPath: /etc/samba/smb.conf
