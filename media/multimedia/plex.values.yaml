@@ -82,6 +82,8 @@ extraVolumeMounts:
     mountPath: "/media/series"
   - name: movies
     mountPath: "/media/movies"
+  - name: backup
+    mountPath: "/backups"
 
 extraVolumes:
   - name: series
@@ -90,3 +92,6 @@ extraVolumes:
   - name: movies
     persistentVolumeClaim:
       claimName: movies
+  - name: backup
+    persistentVolumeClaim:
+      claimName: plex-backup
