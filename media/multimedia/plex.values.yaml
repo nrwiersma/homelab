@@ -51,7 +51,7 @@ extraInitContainers:
     restartPolicy: Always
     env:
       - name: PLEX_PATH
-        value: /config
+        value: "/config/Library/Application Support/Plex Media Server"
       - name: MODE
         value: remove
       - name: SCHEDULE
