@@ -9,7 +9,7 @@ spec:
   sources:
     - repoURL: https://charts.jetstack.io
       chart: cert-manager
-      targetRevision: 1.14.4
+      targetRevision: 1.17.2
       helm:
         releaseName: cert-manager
         valueFiles:
