@@ -40,14 +40,14 @@ spec:
               value: "1000"
             - name: TZ
               value: Etc/UTC
-#          livenessProbe:
-#            httpGet:
-#              path: /health
-#              port: http
-#          readinessProbe:
-#            httpGet:
-#              path: /health
-#              port: http
+          # livenessProbe:
+          #  httpGet:
+          #    path: /health
+          #    port: http
+          # readinessProbe:
+          #  httpGet:
+          #    path: /health
+          #    port: http
           resources:
             requests:
               cpu: "1"
