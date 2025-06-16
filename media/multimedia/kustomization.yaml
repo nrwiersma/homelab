@@ -9,7 +9,6 @@ resources:
   - sonarr.yaml
   - radarr.yaml
   - sabnzbd.yaml
-  - jellyfin.yaml
 
 images:
   - name: ghcr.io/linuxserver/sonarr
@@ -18,5 +17,3 @@ images:
     newTag: 5.22.4
   - name: ghcr.io/linuxserver/sabnzbd
     newTag: 4.5.1
-  - name: ghcr.io/linuxserver/jellyfin
-    newTag: 10.10.7
