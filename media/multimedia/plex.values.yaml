@@ -2,7 +2,7 @@
 image:
   registry: ghcr.io
   repository: linuxserver/plex
-  tag: "1.41.6"
+  tag: "1.42.1"
 
 pms:
   configStorage: 10Gi
