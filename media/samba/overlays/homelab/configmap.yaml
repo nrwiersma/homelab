@@ -38,7 +38,7 @@ data:
     valid users = media
     inherit acls = yes
     fruit:time machine = yes
-    fruit:time machine max size = 700G
+    fruit:time machine max size = 800G
     [Movies]
     path = /opt/movies
     read only = no
