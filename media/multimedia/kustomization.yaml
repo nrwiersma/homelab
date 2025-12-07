@@ -5,6 +5,8 @@ kind: Kustomization
 namespace: media
 
 resources:
+  - external-secret.yaml
+  - pv.yaml
   - pvc.yaml
   - sonarr.yaml
   - radarr.yaml
