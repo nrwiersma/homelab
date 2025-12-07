@@ -11,7 +11,7 @@ data:
     create-default-disk-labeled-nodes: true
     default-data-path: /data
     storage-reserved-percentage-for-default-disk: 0
-    default-replica-count: 2
+    default-replica-count: 3
     taint-toleration: node-role.kubernetes.io/storage:NoSchedule
     snapshot-data-integrity: fast-check
     snapshot-data-integrity-cronjob: "0 2,12 * * *"
