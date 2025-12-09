@@ -129,9 +129,6 @@ grafana:
     size: 1Gi
     finalizers:
       - kubernetes.io/pvc-protection
-  deploymentStrategy:
-    type: Recreate
-    rollingUpdate: null
   resources:
     requests:
       cpu: 100m
