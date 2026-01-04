@@ -1,4 +1,8 @@
-# HomeLab
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="http://svg.wiersma.co.za/github/project.v2?title=homelab&tag=k8s%20homelab&mode=dark">
+  <source media="(prefers-color-scheme: light)" srcset="http://svg.wiersma.co.za/github/project.v2?title=homelab&tag=k8s%20homelab">
+  <img alt="Logo" src="http://svg.wiersma.co.za/github/project.v2?title=homelab&tag=k8s%20homelab">
+</picture>
 
 [![Build Status](https://github.com/nrwiersma/homelab/actions/workflows/tests.yml/badge.svg)](https://github.com/nrwiersma/infra/actions)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hamba/avro/master/LICENSE)
