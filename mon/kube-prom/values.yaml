@@ -109,6 +109,10 @@ prometheus:
       requests:
         cpu: 1
         memory: 2Gi
+    additionalScrapeConfigs:
+      - job_name: 'auramon-test'
+        static_configs:
+          - targets: ['aura-mon.wiersma.lan:80']
 
 grafana:
   plugins: []
