@@ -115,6 +115,7 @@ prometheus:
           - targets: ['aura-mon.wiersma.lan:80']
 
 grafana:
+  adminPassword: "grafana"
   plugins: []
   grafana.ini:
     auth:
