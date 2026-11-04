@@ -83,6 +83,17 @@ patches:
   - target:
       version: v1
       kind: Deployment
+      name: argocd-dex-server
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+  - target:
+      version: v1
+      kind: Deployment
       name: argocd-redis
     patch: |-
       - op: replace
