@@ -18,8 +18,8 @@ service:
   port: 80
   annotations:
     metallb.universe.tf/loadBalancerIPs: "10.0.2.8"
-    external-dns.alpha.kubernetes.io/hostname: plex.wiersma.tech.
-    external-dns.alpha.kubernetes.io/ttl: 5m
+    external-dns.kubernetes.io/hostname: plex.wiersma.tech.
+    external-dns.kubernetes.io/ttl: 5m
 
 extraEnv:
   PUID: "1000"

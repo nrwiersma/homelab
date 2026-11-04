@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: argocd-server
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: argocd.wiersma.tech.
-    external-dns.alpha.kubernetes.io/ttl: 5m
+    external-dns.kubernetes.io/hostname: argocd.wiersma.tech.
+    external-dns.kubernetes.io/ttl: 5m
 spec:
   type: LoadBalancer

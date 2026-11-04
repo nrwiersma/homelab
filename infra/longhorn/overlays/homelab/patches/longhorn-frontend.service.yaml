@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: longhorn-frontend
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: longhorn.wiersma.tech.
-    external-dns.alpha.kubernetes.io/ttl: 5m
+    external-dns.kubernetes.io/hostname: longhorn.wiersma.tech.
+    external-dns.kubernetes.io/ttl: 5m
 spec:
   type: LoadBalancer

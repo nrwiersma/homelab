@@ -15,3 +15,7 @@ patches:
       kind: Deployment
       name: external-dns
     path: patches/external-dns.deployment.yaml
+
+images:
+  - name: registry.k8s.io/external-dns/external-dns
+    newTag: v0.24.0

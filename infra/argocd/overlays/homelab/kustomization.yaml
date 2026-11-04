@@ -81,16 +81,69 @@ patches:
             cpu: 100m
             memory: 100Mi
   - target:
+      group: apps
       version: v1
       kind: Deployment
       name: argocd-dex-server
     patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: 10m
-            memory: 50Mi
+      $patch: delete
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: argocd-dex-server
+  - target:
+      version: v1
+      kind: Service
+      name: argocd-dex-server
+    patch: |-
+      $patch: delete
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: argocd-dex-server
+  - target:
+      version: v1
+      kind: ServiceAccount
+      name: argocd-dex-server
+    patch: |-
+      $patch: delete
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: argocd-dex-server
+  - target:
+      group: rbac.authorization.k8s.io
+      version: v1
+      kind: Role
+      name: argocd-dex-server
+    patch: |-
+      $patch: delete
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: Role
+      metadata:
+        name: argocd-dex-server
+  - target:
+      group: rbac.authorization.k8s.io
+      version: v1
+      kind: RoleBinding
+      name: argocd-dex-server
+    patch: |-
+      $patch: delete
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: argocd-dex-server
+  - target:
+      group: networking.k8s.io
+      version: v1
+      kind: NetworkPolicy
+      name: argocd-dex-server-network-policy
+    patch: |-
+      $patch: delete
+      apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: argocd-dex-server-network-policy
   - target:
       version: v1
       kind: Deployment

@@ -41,9 +41,9 @@ metadata:
   namespace: external-secrets
 type: Opaque
 stringData:
-  # NOTE: This secret value must be base64 encoded after it becomes the OP_SESSION env var in the Connect Server Deployment, that means double base64 encoded here. (Or single w/ stringData.)
+  # NOTE: The credentials are mounted as a file, so this is the raw contents of 1password-credentials.json.
   1password-credentials.json: |-
-    base64-encoded-file
+    contents-of-file
 ```
 
 #### Setup Applications
