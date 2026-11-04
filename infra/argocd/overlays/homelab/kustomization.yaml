@@ -91,7 +91,3 @@ patches:
           requests:
             cpu: 10m
             memory: 50Mi
-
-replicas:
-  - name: argocd-dex-server
-    count: 0
