@@ -110,9 +110,12 @@ prometheus:
         cpu: 1
         memory: 2Gi
     additionalScrapeConfigs:
+      - job_name: 'auramon'
+        static_configs:
+          - targets: ['aura-mon.wiersma.iot:80']
       - job_name: 'auramon-test'
         static_configs:
-          - targets: ['aura-mon.wiersma.lan:80']
+          - targets: ['aura-mon-test.wiersma.lan:80']
 
 grafana:
   adminPassword: "grafana"
