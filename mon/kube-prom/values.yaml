@@ -113,9 +113,9 @@ prometheus:
       - job_name: 'auramon'
         static_configs:
           - targets: ['aura-mon.wiersma.iot:80']
-      - job_name: 'auramon-test'
-        static_configs:
-          - targets: ['aura-mon-test.wiersma.lan:80']
+#      - job_name: 'auramon-test'
+#        static_configs:
+#          - targets: ['aura-mon-test.wiersma.lan:80']
 
 grafana:
   adminPassword: "grafana"
